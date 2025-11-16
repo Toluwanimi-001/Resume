@@ -47,37 +47,39 @@
             pointer-events: none;
             z-index: 9999;
             background: radial-gradient(
-                600px circle at var(--mouse-x) var(--mouse-y),
-                rgba(100, 255, 218, 0.06),
+                400px circle at var(--mouse-x) var(--mouse-y),
+                rgba(100, 255, 218, 0.08),
                 transparent 40%
             );
-            transition: background 0.3s ease;
+            transition: background 0.1s ease-out;
             opacity: 0;
             animation: fadeIn 1s ease forwards;
         }
 
         .cursor-trail {
             position: fixed;
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
             background: radial-gradient(circle, var(--green) 0%, transparent 70%);
             pointer-events: none;
             z-index: 9998;
             mix-blend-mode: screen;
-            transition: transform 0.1s ease;
-            opacity: 0.7;
+            transition: transform 0.05s ease-out;
+            opacity: 0.8;
+            filter: blur(1px);
         }
 
         .cursor-dot {
             position: fixed;
-            width: 4px;
-            height: 4px;
+            width: 6px;
+            height: 6px;
             border-radius: 50%;
             background-color: var(--green);
             pointer-events: none;
             z-index: 9999;
-            transition: transform 0.15s ease;
+            transition: transform 0.08s ease-out;
+            box-shadow: 0 0 10px var(--green);
         }
 
         @keyframes fadeIn {
@@ -1566,13 +1568,12 @@
     </div>
 
     <script>
-
         window.addEventListener('load', function() {
             setTimeout(() => {
                 document.getElementById('loadingScreen').classList.add('hidden');
             }, 1000);
         });
-
+        
         const spotlight = document.getElementById('spotlight');
         const cursorTrail = document.getElementById('cursorTrail');
         const cursorDot = document.getElementById('cursorDot');
@@ -1595,27 +1596,27 @@
             });
 
             function animateSpotlight() {
-                trailX += (mouseX - trailX) * 0.1;
-                trailY += (mouseY - trailY) * 0.1;
+                trailX += (mouseX - trailX) * 0.2;
+                trailY += (mouseY - trailY) * 0.2;
 
                 spotlight.style.setProperty('--mouse-x', `${mouseX}px`);
                 spotlight.style.setProperty('--mouse-y', `${mouseY}px`);
 
-                cursorTrail.style.transform = `translate(${trailX - 10}px, ${trailY - 10}px)`;
-                cursorDot.style.transform = `translate(${mouseX - 2}px, ${mouseY - 2}px)`;
+                cursorTrail.style.transform = `translate(${trailX - 12}px, ${trailY - 12}px)`;
+                cursorDot.style.transform = `translate(${mouseX - 3}px, ${mouseY - 3}px)`;
 
                 requestAnimationFrame(animateSpotlight);
             }
 
             animateSpotlight();
         } else {
-  
             spotlight.style.display = 'none';
             cursorTrail.style.display = 'none';
             cursorDot.style.display = 'none';
             document.body.style.cursor = 'auto';
         }
 
+        
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const mobileNav = document.getElementById('mobileNav');
         const menuOverlay = document.getElementById('menuOverlay');
