@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Akinyemi Toluwanimi</title>
+    <title>Akinyemi Toluwanimi | Frontend Developer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -15,6 +15,7 @@
             --lightest-slate: #ccd6f6;
             --white: #e6f1ff;
             --green: #64ffda;
+            --green-tint: rgba(100, 255, 218, 0.1);
             --font-sans: 'Calibre', 'Inter', 'San Francisco', 'SF Pro Text', -apple-system, system-ui, sans-serif;
             --font-mono: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
         }
@@ -37,7 +38,7 @@
             overflow-x: hidden;
             cursor: none;
         }
-
+        /* Enhanced Spotlight Effect */
         .spotlight {
             position: fixed;
             top: 0;
@@ -47,13 +48,13 @@
             pointer-events: none;
             z-index: 9999;
             background: radial-gradient(
-                400px circle at var(--mouse-x) var(--mouse-y),
-                rgba(100, 255, 218, 0.08),
+                600px circle at var(--mouse-x) var(--mouse-y),
+                rgba(100, 255, 218, 0.12),
                 transparent 40%
             );
-            transition: background 0.1s ease-out;
+            transition: background 0.15s ease-out;
             opacity: 0;
-            animation: fadeIn 1s ease forwards;
+            animation: fadeIn 1.5s ease forwards;
         }
 
         .cursor-trail {
@@ -65,8 +66,8 @@
             pointer-events: none;
             z-index: 9998;
             mix-blend-mode: screen;
-            transition: transform 0.05s ease-out;
-            opacity: 0.8;
+            transition: transform 0.08s ease-out;
+            opacity: 0.7;
             filter: blur(1px);
         }
 
@@ -78,8 +79,8 @@
             background-color: var(--green);
             pointer-events: none;
             z-index: 9999;
-            transition: transform 0.08s ease-out;
-            box-shadow: 0 0 10px var(--green);
+            transition: transform 0.1s ease-out;
+            box-shadow: 0 0 12px var(--green);
         }
 
         @keyframes fadeIn {
@@ -135,6 +136,23 @@
             color: var(--green);
             font-family: var(--font-mono);
             transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--green);
+            transition: width 0.3s ease;
+        }
+        
+        .logo:hover::after {
+            width: 100%;
         }
         
         .logo:hover {
@@ -482,6 +500,7 @@
             line-height: 1.1;
             opacity: 0;
             animation: fadeUp 0.8s ease 0.2s forwards;
+  
         }
         
         .hero h2 {
@@ -598,7 +617,7 @@
         .about-text p {
             margin-bottom: 20px;
             line-height: 1.6;
-        }
+        }        
         
         .skills-list {
             display: grid;
@@ -693,7 +712,7 @@
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 30px;
         }
-        
+                
         .project-card {
             background-color: var(--light-navy);
             border-radius: 5px;
@@ -1060,6 +1079,7 @@
             transform: scale(1.1);
         }
 
+ 
         .loading-screen {
             position: fixed;
             top: 0;
@@ -1086,13 +1106,28 @@
             border-top: 3px solid var(--green);
             border-radius: 50%;
             animation: spin 1s linear infinite;
+            position: relative;
+        }
+        
+        .loader::after {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            border: 3px solid transparent;
+            border-top: 3px solid var(--green);
+            border-radius: 50%;
+            animation: spin 1.5s linear infinite reverse;
+            opacity: 0.5;
         }
         
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        
+    
         @media (max-width: 1024px) {
             header {
                 padding: 0 30px;
@@ -1347,12 +1382,35 @@
         @media (width: 1366px) and (height: 1024px) {
             .about-content {
                 grid-template-columns: 2fr 1fr;
-            }
+                }
         }
  
         img {
             max-width: 100%;
             height: auto;
+        }
+ 
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid var(--green);
+            outline-offset: 4px;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--light-navy);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--green);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--lightest-slate);
         }
     </style>
 </head>
@@ -1397,11 +1455,11 @@
     </div>
     
     <div class="side-social">
-        <a href="https://github.com/Toluwanimi-001" target="_blank"><i class="fab fa-github"></i></a>
-        <a href="https://www.instagram.com/toluwanimi.akinyemi?igsh=emdjZnpoY3Q3djZm" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a href="https://x.com/AkinyemiTo9623?t=YGHOJiOTKg_Zo-VzwV4W4Q&s=09" target="_blank"><i class="fab fa-twitter"></i></a>
-        <a href="https://www.linkedin.com/in/toluwanimi-akinyemi-49a854340?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank"><i class="fab fa-linkedin"></i></a>
-        <a href="https://api.whatsapp.com/send?phone=2349060335653&text=Good+Day%2C+Toluwanimi%2C+I+was+intrigued+by+your+r%C3%A8sum%C3%A9+and+I+decided+to+send+a+DM.+%0AMy+name+is+" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        <a href="https://github.com/Toluwanimi-001" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://www.instagram.com/toluwanimi.akinyemi?igsh=emdjZnpoY3Q3djZm" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://x.com/AkinyemiTo9623?t=YGHOJiOTKg_Zo-VzwV4W4Q&s=09" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.linkedin.com/in/toluwanimi-akinyemi-49a854340?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://api.whatsapp.com/send?phone=2349060335653&text=Good+Day%2C+Toluwanimi%2C+I+was+intrigued+by+your+r%C3%A8sum%C3%A9+and+I+decided+to+send+a+DM.+%0AMy+name+is+" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
     </div>
 
     <main>
@@ -1479,8 +1537,8 @@
                             <i class="far fa-folder"></i>
                         </div>
                         <div class="project-links">
-                            <a href="https://github.com/Toluwanimi-001" target="_blank"><i class="fab fa-github"></i></a>
-                            <a href="https://toluwanimi-001.github.io/Quote-Generator/" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://github.com/Toluwanimi-001" target="_blank" aria-label="GitHub Repository"><i class="fab fa-github"></i></a>
+                            <a href="https://toluwanimi-001.github.io/Quote-Generator/" target="_blank" aria-label="Live Demo"><i class="fas fa-external-link-alt"></i></a>
                         </div>
                     </div>
                     <h3 class="project-title">Quote Generator</h3>
@@ -1499,8 +1557,8 @@
                             <i class="far fa-folder"></i>
                         </div>
                         <div class="project-links">
-                            <a href="https://github.com/Toluwanimi-001"><i class="fab fa-github"></i></a>
-                            <a href="https://toluwanimi-001.github.io/Portfolio-Website/" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://github.com/Toluwanimi-001" target="_blank" aria-label="GitHub Repository"><i class="fab fa-github"></i></a>
+                            <a href="https://toluwanimi-001.github.io/Portfolio-Website/" target="_blank" aria-label="Live Demo"><i class="fas fa-external-link-alt"></i></a>
                         </div>
                     </div>
                     <h3 class="project-title">Portfolio Website</h3>
@@ -1519,8 +1577,8 @@
                             <i class="far fa-folder"></i>
                         </div>
                         <div class="project-links">
-                            <a href="https://github.com/Toluwanimi-001" target="_blank"><i class="fab fa-github"></i></a>
-                            <a href="https://toluwanimi-001.github.io/TaskMaster/" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://github.com/Toluwanimi-001" target="_blank" aria-label="GitHub Repository"><i class="fab fa-github"></i></a>
+                            <a href="https://toluwanimi-001.github.io/TaskMaster/" target="_blank" aria-label="Live Demo"><i class="fas fa-external-link-alt"></i></a>
                         </div>
                     </div>
                     <h3 class="project-title">Task Management App</h3>
@@ -1545,11 +1603,11 @@
 
     <footer>
         <div class="social-links">
-            <a href="https://github.com/Toluwanimi-001" target="_blank"><i class="fab fa-github"></i></a>
-            <a href="https://www.instagram.com/toluwanimi.akinyemi?igsh=emdjZnpoY3Q3djZm" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://x.com/AkinyemiTo9623?t=YGHOJiOTKg_Zo-VzwV4W4Q&s=09" target="_blank"><i class="fab fa-twitter"></i></a>
-            <a href="https://www.linkedin.com/in/toluwanimi-akinyemi-49a854340?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank"><i class="fab fa-linkedin"></i></a>
-            <a href="https://api.whatsapp.com/send?phone=2349060335653&text=Good+Day%2C+Toluwanimi%2C+I+was+intrigued+by+your+r%C3%A8sum%C3%A9+and+I+decided+to+send+a+DM.+%0AMy+name+is+" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://github.com/Toluwanimi-001" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.instagram.com/toluwanimi.akinyemi?igsh=emdjZnpoY3Q3djZm" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://x.com/AkinyemiTo9623?t=YGHOJiOTKg_Zo-VzwV4W4Q&s=09" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.linkedin.com/in/toluwanimi-akinyemi-49a854340?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://api.whatsapp.com/send?phone=2349060335653&text=Good+Day%2C+Toluwanimi%2C+I+was+intrigued+by+your+r%C3%A8sum%C3%A9+and+I+decided+to+send+a+DM.+%0AMy+name+is+" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
         </div>
         <p><b>Designed & Built by Toluwanimi Akinyemi</b></p>
         <p><b>Inspired by Brittany Chiang</b></p>
