@@ -309,9 +309,23 @@
       box-shadow: 0 20px 30px -12px rgba(44,52,36,0.08);
     }
     .service-icon {
-      font-size: 2rem;
-      color: var(--cypress);
+      /* container for custom SVG – ensures perfect alignment */
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.8rem;
+      height: 2.8rem;
       margin-bottom: 1.5rem;
+      color: var(--cypress);
+    }
+    .service-icon svg,
+    .service-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .service-icon svg {
+      fill: currentColor; /* makes SVG inherit the green color */
     }
     .service-title {
       font-family: var(--display);
@@ -459,6 +473,12 @@
       font-size: 1rem;
       line-height: 1.6;
     }
+    .contact-actions {
+      display: flex;
+      gap: 1.2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
     #contact .btn-primary {
       background: var(--cedar);
       color: var(--moss);
@@ -466,6 +486,14 @@
     #contact .btn-primary:hover {
       background: var(--olive);
       color: var(--moss);
+    }
+    #contact .btn-secondary {
+      border-color: var(--cedar);
+      color: var(--aloe);
+    }
+    #contact .btn-secondary:hover {
+      background: rgba(218,222,216,0.1);
+      border-color: var(--aloe);
     }
 
     footer {
@@ -542,6 +570,7 @@
     }
     .modal-bg.open { opacity: 1; pointer-events: auto; }
     .modal-box {
+      position: relative; /* ensures close button stays inside */
       background: var(--aloe);
       padding: 2.5rem 2rem;
       max-width: 400px;
@@ -599,8 +628,9 @@
       transform: translateY(0);
     }
 
-    *:focus {
-      outline: none;
+    *:focus-visible {
+      outline: 2px solid var(--cypress);
+      outline-offset: 2px;
     }
 
     @media (max-width: 900px) {
@@ -622,13 +652,28 @@
         height: 60px;
       }
     }
+
+    /* Mobile button alignment for contact section */
+    @media (max-width: 480px) {
+      .contact-actions {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+      }
+      .contact-actions .btn-primary,
+      .contact-actions .btn-secondary {
+        width: 100%;
+        max-width: 280px;
+        text-align: center;
+      }
+    }
   </style>
 </head>
 <body>
 
 <nav id="nav">
   <div class="nav-logo">
-    <img src="resume-logo.png" alt="TA Logo" onerror="this.style.display='none'; this.nextSibling.style.display='block';" />
+    <img src="resume-logo.png" alt="Toluwanimi Akinyemi logo" />
     <span class="logo-text" style="display: none;">T<span>A</span></span>
   </div>
   <div class="nav-links">
@@ -637,7 +682,7 @@
     <a href="#contact">Contact</a>
     <button class="nav-cta" id="resumeBtn">Resume</button>
   </div>
-  <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  <div class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></div>
 </nav>
 <div class="overlay" id="overlay"></div>
 <div class="mobile-drawer" id="drawer">
@@ -649,7 +694,7 @@
 
 <section class="hero">
   <div class="hero-bg">
-    <img src="background-image.jpg" alt="background" onerror="this.style.display='none'" />
+    <img src="background-image.jpg" alt="" role="presentation" />
   </div>
   <div class="hero-content">
     <div class="greeting">Hi, my name is</div>
@@ -670,17 +715,24 @@
     </div>
     <div class="three-col-grid">
       <div class="service-card reveal delay-1">
-        <div class="service-icon"><i class="fas fa-palette"></i></div>
+        <!-- Replace the content below with your custom SVG for Design -->
+        <div class="service-icon">
+        <img src="design.svg" alt="Design icon">
+        </div>
         <h3 class="service-title">Design</h3>
         <p class="service-desc">Design isn't just what a product looks like; it's how it feels. I focus on creating clean, intuitive interfaces that balance aesthetics with function, ensuring every interaction is seamless.</p>
       </div>
       <div class="service-card reveal delay-2">
-        <div class="service-icon"><i class="fas fa-code"></i></div>
+        <div class="service-icon">
+         <img src="development.svg" alt="Development icon">
+        </div>
         <h3 class="service-title">Development</h3>
         <p class="service-desc">I write semantic, maintainable code with a focus on performance and accessibility. From responsive layouts to interactive components, I build web experiences that stand the test of time.</p>
       </div>
       <div class="service-card reveal delay-3">
-      <div class="service-icon"><i class="fas fa-users"></i></div>
+        <div class="service-icon">
+          <img src="involvment.svg" alt="Involvment Icon">
+        </div>
         <h3 class="service-title">Involvement</h3>
         <p class="service-desc">I actively contribute to open-source, mentor new developers, and collaborate with local tech communities. I believe in sharing knowledge and growing together.</p>
       </div>
@@ -695,11 +747,11 @@
         <div class="section-label">Selected Work</div>
         <h2 class="section-title">Projects I'm proud of.</h2>
       </div>
-      <a href="https://github.com/Toluwanimi-001" target="_blank" style="font-size:.8rem;letter-spacing:.1em;color:var(--olive);border-bottom:1px solid var(--cedar);">View GitHub →</a>
+      <a href="https://github.com/Toluwanimi-001" target="_blank" rel="noopener noreferrer" style="font-size:.8rem;letter-spacing:.1em;color:var(--olive);border-bottom:1px solid var(--cedar);">View GitHub →</a>
     </div>
     <div class="projects-grid reveal delay-2">
       <div class="project-card featured">
-        <div class="project-thumb"><img src="zhalem-styles.png" alt="Zhalem Styles" /></div>
+        <div class="project-thumb"><img src="zhalem-styles.png" alt="Zhalem Styles e‑commerce homepage" /></div>
         <div class="project-info">
           <div class="project-meta">
             <div class="project-number">01 / Featured</div>
@@ -708,13 +760,13 @@
             <div class="project-tags"><span class="project-tag">React</span><span class="project-tag">CSS</span></div>
           </div>
           <div class="project-links">
-            <a href="https://github.com/Toluwanimi-001" class="project-link" target="_blank"><i class="fab fa-github"></i></a>
-            <a href="https://zhalem-styles.vercel.app" class="project-link" target="_blank"><i class="fas fa-arrow-up-right-from-square"></i></a>
+            <a href="https://github.com/Toluwanimi-001" class="project-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+            <a href="https://zhalem-styles.vercel.app" class="project-link" target="_blank" rel="noopener noreferrer"><i class="fas fa-arrow-up-right-from-square"></i></a>
           </div>
         </div>
       </div>
       <div class="project-card">
-        <div class="project-thumb"><img src="pallu.png" alt="Pallu" /></div>
+        <div class="project-thumb"><img src="pallu.png" alt="Pallu project screenshot" /></div>
         <div class="project-info">
           <div class="project-meta">
             <div class="project-number">02</div>
@@ -722,13 +774,13 @@
             <div class="project-tags"><span class="project-tag">HTML/CSS</span><span class="project-tag">JS</span></div>
           </div>
           <div class="project-links">
-            <a href="https://github.com/Toluwanimi-001/Portfolio-Website" class="project-link" target="_blank"><i class="fab fa-github"></i></a>
-            <a href="https://pallu-tau.vercel.app/" class="project-link" target="_blank"><i class="fas fa-arrow-up-right-from-square"></i></a>
+            <a href="https://github.com/Toluwanimi-001/Portfolio-Website" class="project-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+            <a href="https://pallu-tau.vercel.app/" class="project-link" target="_blank" rel="noopener noreferrer"><i class="fas fa-arrow-up-right-from-square"></i></a>
           </div>
         </div>
       </div>
       <div class="project-card">
-        <div class="project-thumb"><img src="savour-and-spice.png" alt="Savour & Spice" /></div>
+        <div class="project-thumb"><img src="savour-and-spice.png" alt="Savour & Spice recipe app screenshot" /></div>
         <div class="project-info">
           <div class="project-meta">
             <div class="project-number">03</div>
@@ -736,13 +788,13 @@
             <div class="project-tags"><span class="project-tag">React</span><span class="project-tag">API</span></div>
           </div>
           <div class="project-links">
-            <a href="https://github.com/Toluwanimi-001/savour-and-spice" class="project-link" target="_blank"><i class="fab fa-github"></i></a>
-            <a href="https://savour-and-spice.vercel.app" class="project-link" target="_blank"><i class="fas fa-arrow-up-right-from-square"></i></a>
+            <a href="https://github.com/Toluwanimi-001/savour-and-spice" class="project-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+            <a href="https://savour-and-spice.vercel.app" class="project-link" target="_blank" rel="noopener noreferrer"><i class="fas fa-arrow-up-right-from-square"></i></a>
           </div>
         </div>
       </div>
       <div class="project-card">
-        <div class="project-thumb"><img src="coming-soon.jpg" alt="Upcoming Project" onerror="this.src='https://placehold.co/800x450?text=Coming+Soon'" /></div>
+        <div class="project-thumb"><img src="coming-soon.jpg" alt="Upcoming project placeholder" loading="lazy" onerror="this.src='https://placehold.co/800x450?text=Coming+Soon'" /></div>
         <div class="project-info">
           <div class="project-meta">
             <div class="project-number">04</div>
@@ -751,8 +803,8 @@
             <div class="project-tags"><span class="project-tag">In Development</span></div>
           </div>
           <div class="project-links">
-            <a href="https://github.com/Toluwanimi-001" class="project-link" target="_blank"><i class="fab fa-github"></i></a>
-            <a href="#" class="project-link" target="_blank"><i class="fas fa-arrow-up-right-from-square"></i></a>
+            <a href="https://github.com/Toluwanimi-001" class="project-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+            <a href="#" class="project-link" target="_blank" rel="noopener noreferrer"><i class="fas fa-arrow-up-right-from-square"></i></a>
           </div>
         </div>
       </div>
@@ -776,17 +828,17 @@
   <div class="footer-inner">
     <div class="footer-brand">Toluwanimi <span>Akinyemi</span></div>
     <div class="footer-links">
-      <a href="https://github.com/Toluwanimi-001" target="_blank"><i class="fab fa-github"></i></a>
-      <a href="https://www.linkedin.com/in/toluwanimi-akinyemi-49a854340" target="_blank"><i class="fab fa-linkedin"></i></a>
-      <a href="https://x.com/AkinyemiTo9623" target="_blank"><i class="fab fa-twitter"></i></a>
+      <a href="https://github.com/Toluwanimi-001" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+      <a href="https://www.linkedin.com/in/toluwanimi-akinyemi-49a854340" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+      <a href="https://x.com/AkinyemiTo9623" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
     </div>
     <p class="footer-copy">Designed & built by Toluwanimi Akinyemi</p>
   </div>
 </footer>
 
 <div class="side-left">
-  <a href="https://github.com/Toluwanimi-001"><i class="fab fa-github"></i></a>
-  <a href="https://www.linkedin.com/in/toluwanimi-akinyemi-49a854340"><i class="fab fa-linkedin"></i></a>
+  <a href="https://github.com/Toluwanimi-001" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+  <a href="https://www.linkedin.com/in/toluwanimi-akinyemi-49a854340" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
   <span class="side-line"></span>
 </div>
 <div class="side-right">
@@ -811,7 +863,13 @@
   window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 20));
 
   const ham = document.getElementById('hamburger'), drawer = document.getElementById('drawer'), overlay = document.getElementById('overlay');
-  function toggleDrawer(open) { ham.classList.toggle('open', open); drawer.classList.toggle('open', open); overlay.classList.toggle('open', open); document.body.style.overflow = open ? 'hidden' : ''; }
+  function toggleDrawer(open) {
+    ham.classList.toggle('open', open);
+    ham.setAttribute('aria-expanded', open);
+    drawer.classList.toggle('open', open);
+    overlay.classList.toggle('open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
   ham.addEventListener('click', () => toggleDrawer(!drawer.classList.contains('open')));
   overlay.addEventListener('click', () => toggleDrawer(false));
   drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggleDrawer(false)));
@@ -838,13 +896,6 @@
   const reveals = document.querySelectorAll('.reveal');
   const obs = new IntersectionObserver(entries => { entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); }); }, { threshold: 0.15 });
   reveals.forEach(el => obs.observe(el));
-
-  document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || (e.ctrlKey && e.key === 'U')) {
-      e.preventDefault();
-    }
-  });
 </script>
 </body>
 </html>
