@@ -43,6 +43,7 @@
 
     a { text-decoration: none; color: inherit; }
 
+    /* Navigation */
     nav {
       position: fixed; top: 0; width: 100%; height: var(--nav-h);
       display: flex; align-items: center; justify-content: space-between;
@@ -155,6 +156,7 @@
     }
     .overlay.open { opacity: 1; pointer-events: auto; }
 
+    /* Hero Section - VIDEO BACKGROUND */
     .hero {
       min-height: 100vh;
       display: flex;
@@ -165,19 +167,35 @@
       text-align: center;
     }
     .hero-bg {
-      position: absolute; inset: 0;
-      background: var(--moss);
+      position: absolute;
+      inset: 0;
+      background: var(--moss); /* fallback color while video loads */
       z-index: 0;
+      overflow: hidden;
     }
-    .hero-bg img {
-      width: 100%; height: 100%; object-fit: cover;
-      opacity: 1;
-      filter: brightness(0.7) grayscale(10%);
+    .hero-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.65) grayscale(12%);
       transform: scale(1.02);
       animation: gentleZoom 14s ease-out forwards;
+      will-change: transform;
     }
     @keyframes gentleZoom {
       to { transform: scale(1); }
+    }
+    /* Optional: additional overlay for better text contrast */
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.45) 100%);
+      z-index: 1;
+      pointer-events: none;
     }
     .hero-content {
       position: relative;
@@ -269,6 +287,7 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    /* sections */
     #what-i-do {
       padding: clamp(5rem, 10vw, 9rem) clamp(1.5rem, 6vw, 4rem);
       background: var(--aloe);
@@ -309,7 +328,6 @@
       box-shadow: 0 20px 30px -12px rgba(44,52,36,0.08);
     }
     .service-icon {
-      /* container for custom SVG – ensures perfect alignment */
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -325,7 +343,7 @@
       object-fit: contain;
     }
     .service-icon svg {
-      fill: currentColor; /* makes SVG inherit the green color */
+      fill: currentColor;
     }
     .service-title {
       font-family: var(--display);
@@ -570,7 +588,7 @@
     }
     .modal-bg.open { opacity: 1; pointer-events: auto; }
     .modal-box {
-      position: relative; /* ensures close button stays inside */
+      position: relative;
       background: var(--aloe);
       padding: 2.5rem 2rem;
       max-width: 400px;
@@ -653,7 +671,6 @@
       }
     }
 
-    /* Mobile button alignment for contact section */
     @media (max-width: 480px) {
       .contact-actions {
         flex-direction: column;
@@ -665,6 +682,17 @@
         width: 100%;
         max-width: 280px;
         text-align: center;
+      }
+    }
+
+    /* ensure video background respects reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .hero-video {
+        animation: none;
+        transform: scale(1);
+      }
+      .reveal {
+        transition: none;
       }
     }
   </style>
@@ -692,9 +720,16 @@
   <a href="#" id="drawerResume" style="font-size:1rem;border:1px solid rgba(218,222,216,.5);padding:.7rem 2rem;">Resume</a>
 </div>
 
+<!-- Hero section with VIDEO background -->
 <section class="hero">
   <div class="hero-bg">
-    <img src="hero background image.png" alt="" role="presentation" />
+    <video class="hero-video" autoplay loop muted playsinline poster="hero background image.png" preload="auto">
+      <!-- High-quality cinematic video: aerial forest / natural light (matches earthy tone) -->
+      <source src="hero background.mp4" type="video/webm">
+      <!-- fallback: alternative source for compatibility -->
+      <source src="https://cdn.pixabay.com/video/2022/11/02/137632-768552348_large.mp4" type="video/mp4">
+      Your browser does not support the video tag. The background image is shown as fallback.
+    </video>
   </div>
   <div class="hero-content">
     <div class="greeting">Hi, my name is</div>
@@ -715,7 +750,6 @@
     </div>
     <div class="three-col-grid">
       <div class="service-card reveal delay-1">
-        <!-- Replace the content below with your custom SVG for Design -->
         <div class="service-icon">
         <img src="design.svg" alt="Design icon">
         </div>
